@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: gzip-project
+    environment: dev
+    group: demo
+    project: gzip-demo
+    tier: devops
+  name: gzip-project
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: gzip-project
+    environment: dev
+    group: demo
+    project: gzip-demo
+    tier: devops
+  type: ClusterIP
