@@ -1,0 +1,12 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+#  - ingress.yaml
+  
+namespace: demo
+
+images:
+- name: gole/project-gzip 
+  newName: ${DOCKER_REPOSITORY}
+  newTag: ${IMAGE_TAG}
+

@@ -5,6 +5,7 @@ on:
       - '*'
 env:
   GITHUB_TAG: ${{ github.REF_NAME }}
+  DOCKER_REPOSITORY: gole/project-gzip
 
 jobs:
   docker-build-push :
@@ -22,8 +23,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker build and push image
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: gole/project-gzip:${{ env.GITHUB_TAG }}-github
+#      - name: Docker build and push image
+#        uses: docker/build-push-action@v3
+#        with:
+#          push: true
+#          tags: ${{ env.DOCKER_REPOSITORY }}:${{ env.GITHUB_TAG }}-github
+  
+  export-env-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update image version
+        run: |
+          export DOCKER_REPOSITORY=${{ env.DOCKER_REPOSITORY }}
+          export IMAGE_TAG=${{ env.GITHUB_TAG }}
+          cd k8s ; envsubst < kustomization.tmpl.yaml > kustomization.yaml | kustomize build .
