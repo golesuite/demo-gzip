@@ -31,6 +31,7 @@ jobs:
   
   export-env-variables:
     runs-on: ubuntu-latest
+    needs: docker-build-push
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
