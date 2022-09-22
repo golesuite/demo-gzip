@@ -26,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: gole/project-gzip:${{ env.GITHUB_TAG }}
+          tags: gole/project-gzip:${{ env.GITHUB_TAG }}-github
