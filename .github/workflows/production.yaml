@@ -1,8 +1,8 @@
 name: Update PROD application image
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 env:
   GITHUB_TAG: ${{ github.REF_NAME }}
   DOCKER_REPOSITORY: gole/project-gzip
@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ env.DOCKER_REPOSITORY }}:${{ env.GITHUB_TAG }}-github
+          tags: gole/project-gzip:latest
 
   deploy-kubernetes:
     runs-on: ubuntu-latest
