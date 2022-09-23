@@ -42,7 +42,7 @@ jobs:
             echo ${{ secrets.K8S_GOLE_CRT }} | base64 -d > k8s.crt
             echo ${{ secrets.K8S_GOLE_KEY }} | base64 -d > k8s.key
             kubectl config set-cluster k0s --server=https://space.golesuite.com:6443 --certificate-authority="$(pwd)/k8s.ca"
-            kubectl config set-credentials seepix --client-certificate="$(pwd)/k8s.crt" --client-key="$(pwd)/k8s.key"
-            kubectl config set-context k0s --cluster=k0s --user=demo
+            kubectl config set-credentials admin --client-certificate="$(pwd)/k8s.crt" --client-key="$(pwd)/k8s.key"
+            kubectl config set-context k0s --cluster=k0s --user=admin
             kubectl config use-context k0s
             kubectl -n demo rollout restart deployment/gzip-project
