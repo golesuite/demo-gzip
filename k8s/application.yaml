@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: demo-gzip 
-  namespace: argocd
+  namespace: argocd 
 spec:
   project: default
 
@@ -12,7 +12,7 @@ spec:
     path: k8s 
   destination:
     server: https://kubernetes.default.svc
-    namespace: demo 
+    namespace: gzip 
   syncPolicy:
     automated:
       selfHeal: true

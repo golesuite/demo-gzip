@@ -30,9 +30,3 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        resources:
-          limit:
-            cpu: 200m
-            memory: 10Mi
-            cpu: 20m
-            memory: 15Mi
