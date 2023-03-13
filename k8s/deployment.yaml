@@ -9,6 +9,7 @@ metadata:
     project: gzip-demo
     tier: devops
 spec:
+  imagePullPolicy: Always
   replicas: 1
   selector:
     matchLabels:
