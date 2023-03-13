@@ -12,7 +12,6 @@ spec:
     path: k8s 
   destination:
     server: https://kubernetes.default.svc
-    namespace: gzip 
   syncPolicy:
     automated:
       selfHeal: true
