@@ -9,7 +9,7 @@ metadata:
     project: gzip-demo
     tier: devops
 spec:
-  replicas: 4 
+  replicas: 1  
   selector:
     matchLabels:
       app: gzip-project
