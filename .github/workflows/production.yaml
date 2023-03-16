@@ -28,22 +28,26 @@ jobs:
           docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }} . --no-cache
           docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }}
 
+  update-application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
       - name: Change image tag 
         run: |
           cd k8s/
           kustomize edit set image ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}=${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }}
           cat kustomization.yaml
 
-#      - name: Commit files
-#        run: |
-#          git config --local user.email "Mauricio Santana"
-#          git config --local user.name "ext_msantana@helpseguros.cl"
-#          git commit -a -m "Change image version using github tag value"
-#
-#
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: main
- 
+      - name: Commit changes
+        run: |
+          git config --local user.email "Maria Aline"
+          git config --local user.name "aline@golesuite.com"
+          git commit -a -m "Change image version using github tag value"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release/argocd
+
