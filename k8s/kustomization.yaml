@@ -1,6 +1,12 @@
 resources:
-  - deployment.yaml
-  - service.yaml
+- deployment.yaml
+- service.yaml
 #  - ingress.yaml
   
-namespace: gzip 
+namespace: gzip
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: gole/project-gzip
+  newName: gole/project-gzip
+  newTag: v0.0.13
