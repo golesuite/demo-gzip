@@ -25,9 +25,8 @@ jobs:
 
       - name: Docker build and push image
         run: |
-          ls
-#          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }} . --no-cache
-#          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }}
+          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }} . --no-cache
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.REF_NAME }}
 
       - name: Change image tag 
         run: |
