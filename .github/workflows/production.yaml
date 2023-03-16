@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:                                                                                                                                                                                                                               
+          persist-credentials: false                                                                                                                                                                                                        
+          fetch-depth: 0 
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -44,6 +47,7 @@ jobs:
         run: |
           git config --local user.email "Maria Aline"
           git config --local user.name "aline@golesuite.com"
+          git checkout release/argocd
           git commit -a -m "Change image version using github tag value"
 
       - name: Push changes
