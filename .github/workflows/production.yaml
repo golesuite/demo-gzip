@@ -47,12 +47,11 @@ jobs:
         run: |
           git config --local user.email "Maria Aline"
           git config --local user.name "aline@golesuite.com"
-          git checkout release/argocd
           git commit -a -m "Change image version using github tag value"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release/argocd
+          branch: main 
 
