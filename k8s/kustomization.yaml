@@ -3,7 +3,6 @@ resources:
 - service.yaml
 #  - ingress.yaml
   
-namespace: gzip
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
