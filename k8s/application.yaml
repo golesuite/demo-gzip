@@ -7,12 +7,12 @@ spec:
   project: default
 
   source:
-    repoURL: git@github.com:golesuite/demo-gzip.git 
+    repoURL: https://github.com/golesuite/demo-gzip.git 
     targetRevision: HEAD
     path: k8s 
   destination:
     server: https://kubernetes.default.svc
-    namespace: gzip
+    namespace: default 
   syncPolicy:
     automated:
       selfHeal: true
