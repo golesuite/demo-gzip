@@ -8,4 +8,4 @@ kind: Kustomization
 images:
 - name: gole/project-gzip
   newName: gole/project-gzip
-  newTag: v0.1.3
+  newTag: v0.1.5
