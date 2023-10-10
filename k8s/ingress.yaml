@@ -7,9 +7,12 @@ metadata:
     nginx.ingress.kubernetes.io: /
     nginx.ingress.kubernetes.io/server-snippet: |
       location ~ [A-Z] {
-        rewrite_by_lua_block {
-          ngx.redirect(string.lower(ngx.var.uri), 301);
+        if ($request_method = POST ) {
+          rewrite_by_lua_block {
+            ngx.redirect(string.lower(ngx.var.uri), 301);
+          }
         }
+
       }
   name: gzip-project
 spec:
@@ -28,3 +31,18 @@ spec:
   - hosts:
     - gzip.golesuite.com
     secretName: gzip-demo-golesuite-com
+     #set $fastcgi '';
+     #set $upstream '';
+     #access_by_lua '
+     #ngx.req.read_body()
+	   #    local data = ngx.req.get_body_data()
+	   #    local  match = ngx.re.match(ngx.var.request_body, "company")
+	   #    if match then
+	   #        ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
+	   #        ngx.var.upstream = "algoapp"
+           #    else
+	   #        ngx.var.upstream = "main"
+           #    end
+           #    ';
+           # proxy_pass $fastcgi;
+           # }
