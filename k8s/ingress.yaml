@@ -12,9 +12,6 @@ metadata:
             local match = ngx.re.match(ngx.var.request_body, "company")
             if match then
               ngx.redirect(string.lower(ngx.var.uri), 301);
-              #ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
-              #else
-              #ngx.var.fastcgi = "main"
             end
           }
         }
@@ -51,3 +48,6 @@ spec:
            #    ';
            # proxy_pass $fastcgi;
            # }
+              #ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
+              #else
+              #ngx.var.fastcgi = "main"
