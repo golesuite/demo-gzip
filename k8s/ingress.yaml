@@ -8,10 +8,10 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: |
       location ~ [A-Z] {
         if ($request_method = POST ) {
-          rewrite_by_lua '
+          access_by_lua '
             local match = ngx.re.match(ngx.var.request_body, "company")
             if match then
-              ngx.redirect(string.lower(ngx.var.uri), 301);
+              return
             end
           ';
         }
