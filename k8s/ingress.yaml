@@ -12,12 +12,7 @@ metadata:
           ngx.req.read_body()
           local r_data = ngx.req.get_body_data()
           local m, err = ngx.re.match(r_data, "company");
-          if m then
-            ngx.redirect(string.lower(ngx.var.uri), 301);
-            return
-          else
-            ngx.say("match not found")
-          end
+          ngx.redirect(string.lower(ngx.var.uri), 301);
         end
       }
   name: gzip-project
@@ -91,3 +86,9 @@ spec:
       #   }
       # }
            
+          # if m then
+          #   ngx.redirect(string.lower(ngx.var.uri), 301);
+          #   return
+          # else
+          #   ngx.say("match not found")
+          # end
