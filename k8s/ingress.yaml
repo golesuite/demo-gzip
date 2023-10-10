@@ -8,12 +8,9 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: |
       location ~ [A-Z] {
         if ($request_method = POST ) {
-          access_by_lua '
-            local match = ngx.re.match(ngx.var.request_body, "company")
-            if match then
-              ngx.exit(500)
-            end
-          ';
+          access_by_lua_block {
+              ngx.redirect(string.lower(ngx.var.uri), 301);
+          }
         }
       }
   name: gzip-project
@@ -60,3 +57,5 @@ spec:
            #     ngx.redirect(string.lower(ngx.var.uri), 301);
            #   end
            # }
+           # local match = ngx.re.match(ngx.var.request_body, "company")
+           # if match then
