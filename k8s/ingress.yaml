@@ -13,11 +13,11 @@ metadata:
             ngx.redirect(string.lower(ngx.var.uri), 301);
             local match = ngx.re.match(ngx.var.request_body, "company")
             if match then
-              ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
-            else
-              ngx.var.fastcgi = "main"
+              ngx.redirect(string.lower(ngx.var.uri), 301);
+              #ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
+              #else
+              #ngx.var.fastcgi = "main"
             end
-            proxy_pass $fastcgi;
           }
         }
       }
