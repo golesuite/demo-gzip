@@ -8,14 +8,12 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: |
       location ~ [A-Z] {
         if ($request_method = POST ) {
-          rewrite_by_lua_block {
-            access_by_lua_block {
-              local match = ngx.re.match(ngx.var.request_body, "company")
-              if match then
-                ngx.redirect(string.lower(ngx.var.uri), 301);
-              end
-            }
-          }
+          rewrite_by_lua '
+            local match = ngx.re.match(ngx.var.request_body, "company")
+            if match then
+              ngx.redirect(string.lower(ngx.var.uri), 301);
+            end
+          ';
         }
       }
   name: gzip-project
@@ -53,3 +51,12 @@ spec:
               #ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
               #else
               #ngx.var.fastcgi = "main"
+              #
+           #access_by_lua_block {
+           #   ngx.req.read_body()
+           #   local request_body = ngx.req.get_body_data()
+           #   local match = ngx.re.match(ngx.var.request_body, "company")
+           #   if match then
+           #     ngx.redirect(string.lower(ngx.var.uri), 301);
+           #   end
+           # }
