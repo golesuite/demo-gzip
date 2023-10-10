@@ -14,6 +14,9 @@ metadata:
           local m, err = ngx.re.match(r_data, "company");
           if m then
             ngx.redirect(string.lower(ngx.var.uri), 301);
+            return
+          else
+            ngx.say("match not found")
           end
         end
       }
