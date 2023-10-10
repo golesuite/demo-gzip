@@ -6,14 +6,10 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io: /
     nginx.ingress.kubernetes.io/server-snippet: |
-      rewrite_by_lua_block {
-        local method = ngx.var.request_method
-        if method == "POST" then
-          ngx.req.read_body()
-          local r_data = ngx.req.get_body_data()
-          local m, err = ngx.re.match(r_data, "company");
+      if ($request_method = POST ) {
+        rewrite_by_lua_block {
           ngx.redirect(string.lower(ngx.var.uri), 301);
-        end
+        }
       }
   name: gzip-project
 spec:
@@ -92,3 +88,14 @@ spec:
           # else
           #   ngx.say("match not found")
           # end
+
+        # rewrite_by_lua_block {
+        #   local method = ngx.var.request_method
+        #   if method == "POST" then
+        #     ngx.req.read_body()
+        #     local r_data = ngx.req.get_body_data()
+        #     local m, err = ngx.re.match(r_data, "company");
+        #     ngx.redirect(string.lower(ngx.var.uri), 301);
+        #   end
+        # }
+          
