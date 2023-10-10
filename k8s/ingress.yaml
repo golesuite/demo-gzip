@@ -7,8 +7,9 @@ metadata:
     nginx.ingress.kubernetes.io/server-snippet: |
       location ~ [A-Z] {
         rewrite_by_lua_block {
-          local r_data = ngx.req.get_body_data()
-          ngx.say(r_data)
+          ngx.req.read_body()
+          local body = ngx.req.get_body_data()
+          ngx.say(body)
           -- local m, err = ngx.re.match(r_data, "company");
           -- if m then
           -- ngx.redirect(string.lower(ngx.var.uri), 301);
