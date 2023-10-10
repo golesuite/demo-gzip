@@ -9,10 +9,12 @@ metadata:
       location ~ [A-Z] {
         if ($request_method = POST ) {
           rewrite_by_lua_block {
-            local match = ngx.re.match(ngx.var.request_body, "company")
-            if match then
-              ngx.redirect(string.lower(ngx.var.uri), 301);
-            end
+            access_by_lua_block {
+              local match = ngx.re.match(ngx.var.request_body, "company")
+              if match then
+                ngx.redirect(string.lower(ngx.var.uri), 301);
+              end
+            }
           }
         }
       }
