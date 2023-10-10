@@ -11,7 +11,7 @@ metadata:
           access_by_lua '
             local match = ngx.re.match(ngx.var.request_body, "company")
             if match then
-              return
+              ngx.exit(500)
             end
           ';
         }
