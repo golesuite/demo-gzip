@@ -4,12 +4,10 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io: /
-    #nginx.ingress.kubernetes.io/server-snippet: |
-    #  if ($request_method = POST ) {
-    #    access_by_lua_block {
-    #      ngx.redirect(string.lower(ngx.var.uri), 301);
-    #    }
-    #  }
+    nginx.ingress.kubernetes.io/server-snippet: |
+      access_by_lua_block {
+        ngx.redirect(string.lower(ngx.var.uri), 301);
+      }
   name: gzip-project
 spec:
   ingressClassName: nginx
