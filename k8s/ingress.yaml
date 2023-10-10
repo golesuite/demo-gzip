@@ -5,7 +5,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io: /
     nginx.ingress.kubernetes.io/server-snippet: |
-      access_by_lua_block {
+      rewrite_by_lua_block {
         ngx.redirect(string.lower(ngx.var.uri), 301);
       }
   name: gzip-project
