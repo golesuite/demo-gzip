@@ -12,7 +12,9 @@ metadata:
           -- ngx.say(body)
           local m, err = ngx.re.match(body, "company");
           if m then
-            ngx.redirect(string.lower(ngx.var.uri), 301);
+            -- ngx.redirect(string.lower(ngx.var.uri), 301);
+            -- ngx rewrite  - /find - /findv2
+            ngx.req.set_uri("/path-with-company-id")
           end
         }
       }
