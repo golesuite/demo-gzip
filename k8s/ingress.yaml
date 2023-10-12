@@ -5,7 +5,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io: /
     nginx.ingress.kubernetes.io/server-snippet: |
-      location ~ [A-Z] {
+      location ~ / {
         rewrite_by_lua_block {
           ngx.req.read_body()
           local body = ngx.req.get_body_data()
@@ -17,6 +17,7 @@ metadata:
             ngx.req.set_uri("/path-with-company-id")
           end
         }
+        proxy_pass http://gzip-project.default.svc.cluster.local
       }
   name: gzip-project
 spec:
