@@ -30,7 +30,7 @@ spec:
           service:
             name: gzip-project
             port:
-              number: 80
+              number: 8080
         path: /
         pathType: ImplementationSpecific
   tls:
