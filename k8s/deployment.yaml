@@ -30,8 +30,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-      - name: VAULT
-        valueFrom:
-          secretKeyRef:
-            name: secret-vault-test
-            key: golesite
+        env:
+        - name: VAULT
+          valueFrom:
+            secretKeyRef:
+              name: secret-vault-test
+              key: golesite
