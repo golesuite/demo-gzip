@@ -2,6 +2,9 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
+
+commonLabels:
+  env: test
   
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
