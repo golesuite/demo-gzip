@@ -8,6 +8,7 @@ metadata:
     group: demo
     project: gzip-demo
     tier: devops
+    env: test
 spec:
   replicas: 1  
   selector:
@@ -23,6 +24,7 @@ spec:
         group: demo
         project: gzip-demo
         tier: devops
+        env: test
     spec:
       containers:
       - name: project-gzip
