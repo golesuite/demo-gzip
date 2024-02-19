@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: project-gzip
-        image: gole/hello-world-java:tempo
+        image: gole/project-gzip:v0.1.5
         imagePullPolicy: Always
         ports:
         - containerPort: 80
