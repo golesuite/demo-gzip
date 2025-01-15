@@ -4,21 +4,21 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io: /
-    nginx.ingress.kubernetes.io/server-snippet: |
-      location ~ / {
-        rewrite_by_lua_block {
-          ngx.req.read_body()
-          local body = ngx.req.get_body_data()
-          -- ngx.say(body)
-          local m, err = ngx.re.match(body, "company");
-          if m then
-            -- ngx.redirect(string.lower(ngx.var.uri), 301);
-            -- ngx rewrite  - /find - /findv2
-            ngx.req.set_uri("/path-with-company-id")
-          end
-        }
-        proxy_pass http://gzip-project.default.svc.cluster.local;
-      }
+#    nginx.ingress.kubernetes.io/server-snippet: |
+#      location ~ / {
+#        rewrite_by_lua_block {
+#          ngx.req.read_body()
+#          local body = ngx.req.get_body_data()
+#          -- ngx.say(body)
+#          local m, err = ngx.re.match(body, "company");
+#          if m then
+#            -- ngx.redirect(string.lower(ngx.var.uri), 301);
+#            -- ngx rewrite  - /find - /findv2
+#            ngx.req.set_uri("/path-with-company-id")
+#          end
+#        }
+#        proxy_pass http://gzip-project.default.svc.cluster.local;
+#      }
   name: gzip-project
 spec:
   ingressClassName: nginx
