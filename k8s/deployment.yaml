@@ -9,12 +9,14 @@ metadata:
     project: gzip-demo
     tier: devops
 spec:
-  replicas: 1
+  replicas: 1  
   selector:
     matchLabels:
       app: gzip-project
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: gzip-project
         environment: dev
@@ -24,12 +26,13 @@ spec:
     spec:
       containers:
       - name: project-gzip
-        image: hello-world-java:latest
+        image: gole/project-gzip:v0.1.5
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: 50Mi
-          requests:
-            memory: 10Mi
+        env:
+        - name: VAULT
+          valueFrom:
+            secretKeyRef:
+              name: secret-vault-test
+              key: golesite

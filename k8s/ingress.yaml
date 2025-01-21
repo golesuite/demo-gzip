@@ -3,10 +3,25 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io: /
+#    nginx.ingress.kubernetes.io/server-snippet: |
+#      location ~ / {
+#        rewrite_by_lua_block {
+#          ngx.req.read_body()
+#          local body = ngx.req.get_body_data()
+#          -- ngx.say(body)
+#          local m, err = ngx.re.match(body, "company");
+#          if m then
+#            -- ngx.redirect(string.lower(ngx.var.uri), 301);
+#            -- ngx rewrite  - /find - /findv2
+#            ngx.req.set_uri("/path-with-company-id")
+#          end
+#        }
+#        proxy_pass http://gzip-project.default.svc.cluster.local;
+#      }
   name: gzip-project
 spec:
+  ingressClassName: nginx
   rules:
   - host: gzip.golesuite.com
     http:
@@ -15,10 +30,80 @@ spec:
           service:
             name: gzip-project
             port:
-              number: 80
+              number: 8080
         path: /
         pathType: ImplementationSpecific
   tls:
   - hosts:
     - gzip.golesuite.com
     secretName: gzip-demo-golesuite-com
+
+     #set $fastcgi '';
+     #set $upstream '';
+     #access_by_lua '
+     #ngx.req.read_body()
+   #    local data = ngx.req.get_body_data()
+   #    local  match = ngx.re.match(ngx.var.request_body, "company")
+   #    if match then
+   #        ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
+   #        ngx.var.upstream = "algoapp"
+           #    else
+   #        ngx.var.upstream = "main"
+           #    end
+           #    ';
+           # proxy_pass $fastcgi;
+           # }
+              #ngx.var.fastcgi = "unix:/var/run/php-fpm/php-fpm.sock"
+              #else
+              #ngx.var.fastcgi = "main"
+              #
+           #access_by_lua_block {
+           #   ngx.req.read_body()
+           #   local request_body = ngx.req.get_body_data()
+           #   local match = ngx.re.match(ngx.var.request_body, "company")
+           #   if match then
+           #     ngx.redirect(string.lower(ngx.var.uri), 301);
+           #   end
+           # }
+           # local match = ngx.re.match(ngx.var.request_body, "company")
+           # if match then
+
+      # location ~ [A-Z] {
+      #   if ($request_method = POST ) {
+
+      #     set $query "";
+
+      #     rewrite_by_lua_block {
+      #       local method = ngx.var.request_method
+      #       if method == "POST" then
+      #         ngx.req.read_body()
+      #         local data = ngx.req.get_body_data()
+            
+
+        
+      #     access_by_lua_block {
+      #       local match = ngx.re.match(ngx.var.request_body, "company");
+      #       if match then
+      #         ngx.redirect(string.lower(ngx.var.uri), 301);
+      #       end
+      #     }
+      #   }
+      # }
+           
+          # if m then
+          #   ngx.redirect(string.lower(ngx.var.uri), 301);
+          #   return
+          # else
+          #   ngx.say("match not found")
+          # end
+
+        # rewrite_by_lua_block {
+        #   local method = ngx.var.request_method
+        #   if method == "POST" then
+        #     ngx.req.read_body()
+        #     local r_data = ngx.req.get_body_data()
+        #     local m, err = ngx.re.match(r_data, "company");
+        #     ngx.redirect(string.lower(ngx.var.uri), 301);
+        #   end
+        # }
+          

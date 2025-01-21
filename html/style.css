@@ -1,6 +1,6 @@
 body {
-  background-color: cornflowerblue;
-  /*background-color: green;*/
+  background-color: #86d6d1;
+  font-family: 'Oswald', sans-serif;
 }
 
 button {
@@ -11,6 +11,25 @@ button {
     margin-top: 20px;
 }
 
+.center {
+    text-align: center;
+    margin-top: 100px;
+}
+
+img {
+    width: 300px;
+
+}
+
+button {
+  background-color: #0E86AF;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
 .rotate-in-2-cw {
 	-webkit-animation: rotate-in-2-cw 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
