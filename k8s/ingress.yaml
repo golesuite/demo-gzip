@@ -21,7 +21,7 @@ metadata:
 #      }
   name: gzip-project
 spec:
-  ingressClassName: kong
+  ingressClassName: nginx
   rules:
   - host: gzip.golesuite.com
     http:
